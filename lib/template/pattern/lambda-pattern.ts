@@ -93,7 +93,7 @@ export class LambdaPattern extends Construct {
             assumedBy: new iam.ServicePrincipal('lambda.amazonaws.com'),
         });
 
-        role.addManagedPolicy({ managedPolicyArn: 'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole' });
+        role.addManagedPolicy({ managedPolicyArn: 'arn:aws-us-gov:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole' });
         for (var item of policies) {
             if (item instanceof iam.PolicyStatement) {
                 role.addToPolicy(item);

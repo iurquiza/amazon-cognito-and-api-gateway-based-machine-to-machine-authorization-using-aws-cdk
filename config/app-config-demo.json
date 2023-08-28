@@ -3,7 +3,7 @@
         "Name": "OAuthClient",
         "Stage": "Demo",
         "Account": "75157*******",
-        "Region": "eu-central-1",
+        "Region": "us-gov-west-1",
         "Profile": "cdk-demo"
     },
 

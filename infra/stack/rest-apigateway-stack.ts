@@ -31,7 +31,7 @@ export class RestApigatewayStack extends base.BaseStack {
             roleName: `${this.stackName}-GatewayIntegrationRole`,
             assumedBy: new iam.ServicePrincipal('apigateway.amazonaws.com'),
         });
-        this.restApiRole.addManagedPolicy({ managedPolicyArn: 'arn:aws:iam::aws:policy/AWSLambda_FullAccess' });
+        this.restApiRole.addManagedPolicy({ managedPolicyArn: 'arn:aws-us-gov:iam::aws:policy/AWSLambda_FullAccess' });
         
         this.addResource('book', 'BackendLambdaBookArn', ['ScopeBookGetName', 'ScopeBookPostName']);
         this.addResource('user', 'BackendLambdaUserArn', ['ScopeUserGetName', 'ScopeUserPostName']);
@@ -41,9 +41,12 @@ export class RestApigatewayStack extends base.BaseStack {
         const restApi = new apigateway.RestApi(this, gatewayName, {
             restApiName: `${this.projectPrefix}-${gatewayName}`,
             description: description,
+            endpointConfiguration: {
+                types: [ apigateway.EndpointType.REGIONAL ]
+            },
             deployOptions: {
                 stageName: this.commonProps.appConfig.Project.Stage,
-                loggingLevel: loggingEnble ? apigateway.MethodLoggingLevel.INFO : apigateway.MethodLoggingLevel.OFF
+                loggingLevel: loggingEnble ? apigateway.MethodLoggingLevel.INFO : apigateway.MethodLoggingLevel.OFF,
             }
         });
 

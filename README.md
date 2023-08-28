@@ -63,6 +63,7 @@ Caution: This solution contains not-free tier AWS services. So be careful about 
 vim config/app-config-demo.json # change project's AWS Account/Region/Profile
 export APP_CONFIG=config/app-config-demo.json
 sh script/setup_initial.sh config/app-config-demo.json
+sh script/deploy_stacks.sh config/app-config-demo.json
 sh script/destroy_stacks.sh config/app-config-demo.json
 ```
 
@@ -84,7 +85,7 @@ sh script/destroy_stacks.sh config/app-config-demo.json
 export CLIENT_ID=....... # check app client in Cognito WebConsole
 export CLIENT_SECRETE=....... # check app client in Cognito WebConsole
 export DOMAIN_NAME=....... # check cdk deploy output: OAuthCognitoStack.OutputCognitoUserPoolDomainName
-curl -X POST --user $CLIENT_ID:$CLIENT_SECRETE $DOMAIN_NAME/oauth2/token?grant_type=client_credentials -H "Content-Type: application/x-www-form-urlencoded" 
+curl -X POST --user $CLIENT_ID:$CLIENT_SECRETE "$DOMAIN_NAME/oauth2/token?grant_type=client_credentials" -H "Content-Type: application/x-www-form-urlencoded" 
 
 {"access_token":".......","expires_in":86400,"token_type":"Bearer"}
 ```
